@@ -1,7 +1,8 @@
-import { useStatsContext } from "../hooks/useStatsContext";
+import { useContext } from "react";
+import { StatsContext } from "../contexts/StatsContext";
 
 function Stats() {
-  const { stats, isCompleted, responses } = useStatsContext();
+  const { stats, isCompleted, responses } = useContext(StatsContext);
 
   const { totalSent, success, networkErrors, errors4xx, errors5xx, minTime, maxTime, totalTime } = stats;
 
@@ -63,7 +64,13 @@ function Stats() {
                   textAlign: "left",
                 }}
               >
-                {JSON.stringify(JSON.parse(res.body), null, 3)}
+                {(() => {
+                  try {
+                    return JSON.stringify(JSON.parse(res.body), null, 3);
+                  } catch {
+                    return res.body;
+                  }
+                })()}
               </pre>
             </div>
           ))}

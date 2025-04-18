@@ -1,7 +1,14 @@
-import React, { ChangeEvent } from "react";
-import { MiddlewareInputProps } from "../types/MiddlewareInputProps";
+import { ChangeEvent, useContext } from "react";
+import { FormContext } from "../../contexts/FormContext";
+import { MiddlewareFunction } from "../../types/MiddelwareFunction";
 
-const MiddlewareInput: React.FC<MiddlewareInputProps> = ({ onAddMiddleware, middlewares }) => {
+function MiddlewareInput() {
+  const { middlewares, setMiddlewares } = useContext(FormContext);
+
+  const onAddMiddleware = (fn: MiddlewareFunction, name: string) => {
+    setMiddlewares((prev) => [...prev, { name, fn }]);
+  };
+
   const handleFileSelect = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files) return;
@@ -40,6 +47,6 @@ const MiddlewareInput: React.FC<MiddlewareInputProps> = ({ onAddMiddleware, midd
       )}
     </div>
   );
-};
+}
 
 export default MiddlewareInput;

@@ -1,4 +1,4 @@
-(req, res, next) => {
+function verifyTokenMiddleware(req, res, next) {
   async function mineNonce() {
     const challenge = "test";
     let nonce = 0;
@@ -21,16 +21,14 @@
     return { nonce, challenge };
   }
 
-  (async () => {
-    const { nonce, challenge } = await mineNonce();
-
-    req.options.headers = {
-      ...(req.options.headers || {}),
+  mineNonce().then(({ nonce, challenge }) => {
+    req.headers = {
+      ...(req.headers || {}),
       "Content-Type": "application/json",
     };
-    req.options.body = JSON.stringify({ nonce, challenge });
+    req.body = JSON.stringify({ nonce, challenge });
 
     console.log("[Middleware PoW] challenge:", challenge, "nonce:", nonce);
     next();
-  })();
-};
+  });
+}

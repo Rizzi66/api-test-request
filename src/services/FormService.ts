@@ -44,6 +44,7 @@ export class FormService {
     });
 
     if (!url || requestCount <= 0 || vagues <= 0) return;
+
     setStats(new Stats());
     setIsCompleted(false);
     setIsRunning(true);
@@ -99,6 +100,7 @@ export class FormService {
     });
 
     try {
+      console.log("reqConfig", reqConfig);
       const response = await fetch(reqConfig.url, reqConfig.options);
       const endTime = performance.now();
       const duration = endTime - startTime;

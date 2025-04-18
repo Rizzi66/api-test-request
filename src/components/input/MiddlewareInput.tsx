@@ -17,7 +17,7 @@ function MiddlewareInput() {
       try {
         const codeText = await file.text();
         console.log(`CodeTest: ${codeText}`);
-        const middlewareFunc = eval(codeText);
+        const middlewareFunc = eval(`(${codeText})`);
         if (typeof middlewareFunc === "function") {
           onAddMiddleware(middlewareFunc, file.name);
           console.log(`Middleware "${file.name}" chargé avec succès.`);
@@ -32,19 +32,21 @@ function MiddlewareInput() {
   };
 
   return (
-    <div style={{ margin: "1rem 0" }}>
-      <label style={{ display: "block", marginBottom: "0.25rem" }}>Ajouter un middleware (fichier .js) :</label>
-      <input type="file" multiple accept=".js" onChange={handleFileSelect} />
-      {middlewares.length > 0 && (
-        <div style={{ marginTop: "0.5rem" }}>
-          <strong>Middlewares actifs :</strong>
-          <ul>
+    <div className="middleware-input">
+      <label>Ajouter un middleware (fichier .js) :</label>
+
+      <div className="middleware-upload">
+        <input type="file" id="middleware-upload" multiple accept=".js" onChange={handleFileSelect} />
+
+        {middlewares.length > 0 && (
+          <ul className="middleware-list">
             {middlewares.map((mw, idx) => (
               <li key={idx}>{mw.name}</li>
             ))}
           </ul>
-        </div>
-      )}
+        )}
+        {middlewares.length === 0 && <div className="middleware-placeholder">Aucun fichier sélectionné</div>}
+      </div>
     </div>
   );
 }

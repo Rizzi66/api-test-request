@@ -48,9 +48,11 @@ function FormInput() {
   return (
     <form onSubmit={handleSubmit} style={{ margin: "1rem 0" }}>
       <URLInput />
-      <NumberInput label="Nombre de requêtes" value={requestCount} setValue={setRequestCount} min={1} />
-      <NumberInput label="Intervalle entre vagues de requètes (ms)" value={interval} setValue={setInterval} min={0} />
-      <NumberInput label="Nombre de vagues de requètes" value={vagues} setValue={setVagues} min={0} />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <NumberInput label="Nombre de requêtes" value={requestCount} setValue={setRequestCount} min={1} />
+        <NumberInput label="Intervalle entre vagues de requètes (ms)" value={interval} setValue={setInterval} min={0} />
+        <NumberInput label="Nombre de vagues de requètes" value={vagues} setValue={setVagues} min={0} />
+      </div>
       <HeadersInput />
       <BodyInput />
       <MiddlewareInput />

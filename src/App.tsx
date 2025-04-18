@@ -3,7 +3,7 @@ import { StatsProvider } from "./contexts/StatsContext.tsx";
 import Header from "./layouts/Header";
 import Home from "./pages/HomePage";
 import Stats from "./pages/StatsPage";
-import "./App.css";
+import "./App.scss";
 import { FormProvider } from "./contexts/FormContext.tsx";
 
 function App() {

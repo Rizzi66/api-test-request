@@ -2,7 +2,7 @@ import FormInput from "../components/FormInput.tsx";
 
 function Home() {
   return (
-    <div>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <FormInput />
     </div>
   );

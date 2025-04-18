@@ -4,17 +4,20 @@ import Header from "./layouts/Header";
 import Home from "./pages/HomePage";
 import Stats from "./pages/StatsPage";
 import "./App.css";
+import { FormProvider } from "./contexts/FormContext.tsx";
 
 function App() {
   return (
     <StatsProvider>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/stats" element={<Stats />} />
-        </Routes>
-      </Router>
+      <FormProvider>
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/stats" element={<Stats />} />
+          </Routes>
+        </Router>
+      </FormProvider>
     </StatsProvider>
   );
 }

@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { FormContext } from "../../contexts/FormContext";
+import trashIcon from "../../assets/trash.svg";
 
 function HeadersInput() {
   const { headers, setHeaders } = useContext(FormContext);
@@ -12,6 +13,11 @@ function HeadersInput() {
 
   const addHeader = () => {
     setHeaders([...headers, { key: "", value: "" }]);
+  };
+
+  const deleteHeader = (index: number) => {
+    const newHeaders = headers.filter((_, i) => i !== index);
+    setHeaders(newHeaders);
   };
 
   return (
@@ -32,9 +38,25 @@ function HeadersInput() {
             value={header.value}
             onChange={(e) => handleHeaderChange(index, "value", e.target.value)}
           />
+          <button
+            type="button"
+            onClick={() => deleteHeader(index)}
+            style={{
+              marginBottom: "0.75rem",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            <img src={trashIcon} alt="Supprimer" width="16" height="16" />
+          </button>
         </div>
       ))}
-      <button type="button" onClick={addHeader} style={{ marginTop: "0.5rem" }}>
+      <button
+        type="button"
+        onClick={addHeader}
+        style={{ fontSize: "small", backgroundColor: "darkslategrey", padding: "0.25rem" }}
+      >
         + Ajouter un header
       </button>
     </div>
